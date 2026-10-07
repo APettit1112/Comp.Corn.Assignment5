@@ -1,9 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductCard from '../assets/components/ProductCard';
 import Header from '../assets/components/Header';
 import Hero from '../assets/components/Hero';
 import Footer from '../assets/components/Footer';
 import CartItem from '../assets/components/CartItem';
+
+const CART_STORAGE_KEY = 'componentcorner-cart';
+
+const loadCart = () => {
+  try {
+    const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+    return storedCart ? JSON.parse(storedCart) : [];
+  } catch {
+    return [];
+  }
+};
 
 const products = [
   {
@@ -51,7 +62,11 @@ const products = [
 ];
 
 function HomePage() {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(loadCart);
+
+  useEffect(() => {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (product) => {
     setCart((currentCart) => [...currentCart, product]);
