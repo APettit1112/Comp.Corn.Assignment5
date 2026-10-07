@@ -1,0 +1,11 @@
+/* style your Footer component with CSS to create a clean footer
+ layout with organized information sections. */
+
+/* Footer styling*/
+.footer {
+    background-color: #3d3b46;
+    color: #f9f6f6;
+    padding: 20px;
+    text-align: center;
+    border-top: 2px solid #7aacd5;
+    }
